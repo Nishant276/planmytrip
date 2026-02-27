@@ -40,12 +40,14 @@ public class BasePage {
     /**
      * Scroll to element
      */
-    public void scrollToElement(int x, int y) {
+    public void scrollToElement(WebElement element) {
         try {
-            Thread.sleep(1000);
-            logger.info("Scrolled to position: " + x + ", " + y);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            Thread.sleep(500);
+            logger.info("Scrolled to element successfully");
         } catch (InterruptedException e) {
             logger.error("Error during scroll: " + e.getMessage());
+            Thread.currentThread().interrupt();
         }
     }
 }
